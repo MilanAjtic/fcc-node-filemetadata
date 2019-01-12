@@ -5,7 +5,19 @@ var cors = require('cors');
 
 // require and use "multer"...
 var multer  = require('multer')
-var upload = multer()
+var path = require('path')
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    var filePath = path.parse(file.originalname)
+    cb(null, filePath.name + " - " + Date.now() + filePath.ext)
+  }
+})
+ 
+var upload = multer({ storage: storage })
 
 var app = express();
 
