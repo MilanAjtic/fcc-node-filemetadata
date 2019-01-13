@@ -17,7 +17,7 @@ var storage = multer.diskStorage({
   }
 })
  
-var upload = multer({ storage: storage })
+var upload = multer({ storage: storage, limits: { fileSize: 1000000 } })
 
 var app = express();
 
